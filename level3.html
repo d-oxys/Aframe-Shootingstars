@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://codechangers.com/physics.js"></script>
+  </head>
+  <body>
+    <a-scene id="myScene">
+      <a-entity environment="preset:goldmine;"></a-entity>
+      <a-plane id="floor" static-body height="1000" width="1000" position="0 -0.02 0" color="black" rotation="-90 0 0"></a-plane>
+      <a-camera id="myCamera" position="0 1 0">
+        <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
+      </a-camera>
+
+      <a-box id="hp-bar1" class="hp-bar" width="3" height="0.2" depth="0.2" position="-2 5 -5" color="lime"> </a-box>
+      <a-box id="hp-bar2" class="hp-bar" width="3" height="0.2" depth="0.2" position="2 5 -5" color="lime"> </a-box>
+      <a-box id="hp-bar3" class="hp-bar" width="3" height="0.2" depth="0.2" position="-2 5 -10" color="lime"> </a-box>
+      <a-box id="hp-bar4" class="hp-bar" width="3" height="0.2" depth="0.2" position="2 5 -10" color="lime"> </a-box>
+      <a-box id="hp-bar5" class="hp-bar" width="3" height="0.2" depth="0.2" position="-2 10 -5" color="lime"> </a-box>
+      <a-box id="hp-bar6" class="hp-bar" width="3" height="0.2" depth="0.2" position="2 10 -5" color="lime"> </a-box>
+      <a-box id="hp-bar7" class="hp-bar" width="3" height="0.2" depth="0.2" position="-2 10 -10" color="lime"> </a-box>
+      <a-box id="hp-bar8" class="hp-bar" width="3" height="0.2" depth="0.2" position="2 10 -10" color="lime"> </a-box>
+
+      <a-icosahedron id="target1" static-body class="target" color="gold" radius="1" hit-points="20" initial-hit-points="20" position="-2 3 -5"></a-icosahedron>
+      <a-icosahedron id="target2" static-body class="target" color="gold" radius="1" hit-points="20" initial-hit-points="20" position="2 3 -5"></a-icosahedron>
+      <a-icosahedron id="target3" static-body class="target" color="gold" radius="1" hit-points="20" initial-hit-points="20" position="-2 3 -10"></a-icosahedron>
+      <a-icosahedron id="target4" static-body class="target" color="gold" radius="1" hit-points="20" initial-hit-points="20" position="2 3 -10"></a-icosahedron>
+      <a-icosahedron id="target5" static-body class="target" color="white" radius="1" hit-points="20" initial-hit-points="20" position="-2 8 -5"></a-icosahedron>
+      <a-icosahedron id="target6" static-body class="target" color="white" radius="1" hit-points="20" initial-hit-points="20" position="2 8 -5"></a-icosahedron>
+      <a-icosahedron id="target7" static-body class="target" color="white" radius="1" hit-points="20" initial-hit-points="20" position="-2 8 -10"></a-icosahedron>
+      <a-icosahedron id="target8" static-body class="target" color="white" radius="1" hit-points="20" initial-hit-points="20" position="2 8 -10"></a-icosahedron>
+      <a-sound src="./asset//music/Driftveil City [Pokémon Black White] [TubeRipper.com].mp3" autoplay="true" loop="true"></a-sound>
+    </a-scene>
+  </body>
+  <script src="https://codechangers.com/camps2019/vr/shoot-partial.js"></script>
+  <script src="script.js"></script>
+  <script>
+    nextLevel = 'level4.html';
+  </script>
+</html>

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Basic Bow
+* source:	https://sketchfab.com/3d-models/basic-bow-20f5a9ac9fca47db9a430cfad7777435
+* author:	ArnieRosemary (https://sketchfab.com/tekons13)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Basic Bow" (https://sketchfab.com/3d-models/basic-bow-20f5a9ac9fca47db9a430cfad7777435) by ArnieRosemary (https://sketchfab.com/tekons13) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

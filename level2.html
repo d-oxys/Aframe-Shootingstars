@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://codechangers.com/physics.js"></script>
+  </head>
+  <body>
+    <a-scene id="myScene">
+      <a-entity environment="preset:forest;"></a-entity>
+      <a-plane id="floor" static-body height="1000" width="1000" position="0 -0.02 0" color="black" rotation="-90 0 0"></a-plane>
+      <a-camera id="myCamera" position="0 1 0">
+        <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
+      </a-camera>
+
+      <a-icosahedron id="target1" static-body class="target" color="white" radius="1" position="-5 3 -10" hit-points="20" initial-hit-points="20">
+        <a-animation attribute="position" to="8 15 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-icosahedron>
+
+      <a-box id="hp-bar1" class="hp-bar" width="3" height="0.2" depth="0.2" position="-5 5 -10" color="lime">
+        <a-animation attribute="position" to="8 17 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-box>
+
+      <a-icosahedron id="target2" static-body class="target" color="white" radius="1" position="5 3 -10" hit-points="20" initial-hit-points="20">
+        <a-animation attribute="position" to="-8 15 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-icosahedron>
+
+      <a-box id="hp-bar2" class="hp-bar" width="3" height="0.2" depth="0.2" position="5 5 -10" color="lime">
+        <a-animation attribute="position" to="-8 17 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-box>
+
+      <a-icosahedron id="target3" static-body class="target" color="white" radius="1" position="15 3 -10" hit-points="20" initial-hit-points="20">
+        <a-animation attribute="rotation" to="0 360 0" dur="1000" repeat="indefinite"></a-animation>
+        <a-animation attribute="position" to="-18 15 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-icosahedron>
+
+      <a-box id="hp-bar3" class="hp-bar" width="3" height="0.2" depth="0.2" position="15 5 -10" color="lime">
+        <a-animation attribute="position" to="-18 17 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-box>
+
+      <a-icosahedron id="target4" static-body class="target" color="white" radius="1" position="-15 3 -10" hit-points="20" initial-hit-points="20">
+        <a-animation attribute="rotation" to="0 360 0" dur="1000" repeat="indefinite"></a-animation>
+        <a-animation attribute="position" to="18 15 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-icosahedron>
+
+      <a-box id="hp-bar4" class="hp-bar" width="3" height="0.2" depth="0.2" position="-15 5 -10" color="lime">
+        <a-animation attribute="position" to="18 17 -10" direction="alternate" dur="2500" repeat="indefinite"></a-animation>
+      </a-box>
+
+      <a-sound src="./asset//music/Driftveil City [Pokémon Black White] [TubeRipper.com].mp3" autoplay="true" loop="true"></a-sound>
+    </a-scene>
+  </body>
+  <script src="https://codechangers.com/camps2019/vr/shoot-partial.js"></script>
+  <script src="script.js"></script>
+  <script>
+    nextLevel = 'level3.html';
+  </script>
+</html>
