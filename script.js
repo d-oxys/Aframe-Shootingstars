@@ -31,7 +31,7 @@ const teleport = () => {
   bullet.addEventListener('collide', teleportCollided);
 };
 
-const MAX_HP_BAR_WIDTH = 10; // Anda bisa mengubah ini sesuai kebutuhan
+const MAX_HP_BAR_WIDTH = 10;
 
 const shootCollided = (event) => {
   if (event.detail.body.el.id === 'floor') {
@@ -45,7 +45,7 @@ const shootCollided = (event) => {
     hitPoints--;
     if (hitPoints > 0) {
       event.detail.body.el.setAttribute('hit-points', hitPoints);
-      let hpBarId = 'hp-bar' + event.detail.body.el.id.charAt(event.detail.body.el.id.length - 1); // asumsikan id target adalah 'target1', 'target2', dll.
+      let hpBarId = 'hp-bar' + event.detail.body.el.id.charAt(event.detail.body.el.id.length - 1);
       let hpBar = document.getElementById(hpBarId);
       let hpBarWidth = Math.min((hitPoints / initialHitPoints) * MAX_HP_BAR_WIDTH, MAX_HP_BAR_WIDTH);
       hpBar.setAttribute('width', hpBarWidth);
@@ -58,10 +58,10 @@ const shootCollided = (event) => {
     } else {
       let hpBarId = 'hp-bar' + event.detail.body.el.id.charAt(event.detail.body.el.id.length - 1);
       let hpBar = document.getElementById(hpBarId);
-      myScene.removeChild(hpBar); // menghapus hp-bar
-      myScene.removeChild(event.detail.body.el); // menghapus target
+      myScene.removeChild(hpBar);
+      myScene.removeChild(event.detail.body.el);
       event.detail.target.el.removeEventListener('collide', shootCollided);
-      myScene.removeChild(event.detail.target.el); // menghapus peluru
+      myScene.removeChild(event.detail.target.el);
     }
     if (document.querySelectorAll('.target').length === 0) {
       console.log('You win!');
@@ -86,28 +86,74 @@ document.onkeydown = (event) => {
   } else if (event.which == 67) {
     teleport();
   } else if (event.which == 77) {
-    // Misalnya, tombol 'm' untuk membuka/menutup menu
     isMenuOpen = !isMenuOpen;
     let menu = document.querySelector('#menu');
     menu.setAttribute('visible', isMenuOpen);
   }
 };
 
-// Add a script to rotate the entities
-var sceneEl = document.querySelector('a-scene');
-sceneEl.addEventListener('loaded', function () {
-  setInterval(function () {
-    var orbit1 = document.querySelector('#orbit1');
-    var orbit2 = document.querySelector('#orbit2');
-    // Repeat for other orbits
+// Fungsi untuk membuat portal
+const createPortal = () => {
+  const portal = document.createElement('a-cylinder');
+  portal.setAttribute('position', '2.5 0 -15');
+  portal.setAttribute('radius', '4');
+  portal.setAttribute('height', '10');
+  portal.setAttribute('color', 'blue');
+  portal.setAttribute('opacity', '0.5');
+  portal.setAttribute('open-ended', 'true');
+  myScene.appendChild(portal);
 
-    var rotation = orbit1.getAttribute('rotation');
-    rotation.y += 1;
-    orbit1.setAttribute('rotation', rotation);
+  portal.addEventListener('click', () => {
+    let isConfirmed = confirm('Apakah kamu bersedia berpindah ke dunia AR?');
+    if (isConfirmed) {
+      window.location.href = 'ar.html';
+    }
+  });
+};
+createPortal();
 
-    rotation = orbit2.getAttribute('rotation');
-    rotation.y += 1;
-    orbit2.setAttribute('rotation', rotation);
-    // Repeat for other orbits
-  }, 100);
+// Fungsi untuk memindai barcode
+const scanBarcode = () => {
+  let video = document.createElement('video');
+  let canvasElement = document.createElement('canvas');
+  let canvas = canvasElement.getContext('2d');
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).then((stream) => {
+    video.srcObject = stream;
+    video.setAttribute('playsinline', true);
+    video.play();
+    requestAnimationFrame(tick);
+  });
+
+  const tick = () => {
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      canvasElement.height = video.videoHeight;
+      canvasElement.width = video.videoWidth;
+      canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+      let imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+      let code = jsQR(imageData.data, imageData.width, imageData.height, {
+        inversionAttempts: 'dontInvert',
+      });
+      if (code) {
+        console.log('Barcode detected:', code.data);
+        // Tambahkan barcode yang disediakan sebelumnya di sini
+        let providedBarcode = '1234567890';
+        if (code.data === providedBarcode) {
+          console.log('Correct barcode scanned, moving to the next level...');
+          window.location.href = 'level4.html';
+        } else {
+          alert('Barcode yang dipindai tidak sesuai. Silakan coba lagi.');
+        }
+      }
+    }
+    requestAnimationFrame(tick);
+  };
+};
+
+// Panggil fungsi scanBarcode saat game dimulai
+scanBarcode();
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'a' || event.key === 'A') {
+    scanBarcode();
+  }
 });
